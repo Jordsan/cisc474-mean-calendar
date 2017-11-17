@@ -9,7 +9,7 @@ exports.testGet = function (req, res, next) {
 }
 
 exports.testGetOne = function (req, res, next) {
-    TestModel.findOne({'testId' : req.params.testId}, function (err, data) {
+    TestModel.findOne({ 'testId': req.params.testId }, function (err, data) {
         if (err) return next(err);
         res.json(data);
     });
@@ -39,7 +39,7 @@ exports.testDeleteAll = function (req, res, next) {
 }
 
 exports.testUpdate = function (req, res, next) {
-    TestModel.findOneAndUpdate({'testId' : req.params.testId}, req.body, function (err) {
+    TestModel.findOneAndUpdate({ 'testId': req.params.testId }, req.body, function (err) {
         if (err) return console.error(err);
 
         let myTestObj = new TestModel({

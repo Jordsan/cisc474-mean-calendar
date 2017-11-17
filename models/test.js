@@ -16,12 +16,12 @@ const TestSchema = mongoose.Schema({
 
 TestSchema.methods.toJson = function () {
     return {
-      testId: this.testId,
-      data: this.data
+        testId: this.testId,
+        data: this.data
     }
-  }
+}
 
-  module.exports = mongoose.model('TestModel', TestSchema); 
+module.exports = mongoose.model('TestModel', TestSchema);
 
 
 

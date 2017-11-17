@@ -5,20 +5,19 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const config = require('./config/config');
-const calendar = require('./controllers/calendar');
 const router = require('./router');
 const app = express();
 
 mongoose.set('debug', true);
-mongoose.Promise=global.Promise
-mongoose.connect(config.database,{useMongoClient: true});
+mongoose.Promise = global.Promise
+mongoose.connect(config.database, { useMongoClient: true });
 
 app.listen(config.port, () => {
     console.log(`Starting the server at port ${config.port}`);
 });
 
-app.use(bodyParser.urlencoded({ extended: false }));  
-app.use(bodyParser.json());  
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
