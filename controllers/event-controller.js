@@ -26,7 +26,8 @@ exports.getUserDateEvents = function (req, res, next) {
     EventModel.find({ 'date': req.params.date, 'userId': req.params.userId }, function (err, data) {
         if (err) return next(err);
         res.json(data);
-    });
+    })
+    .sort({startTime: 1});
 }
 
 exports.getUserMonthEvents = function (req, res, next) {
