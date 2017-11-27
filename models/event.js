@@ -7,8 +7,8 @@ const EventSchema = mongoose.Schema({
         type: Number,
         required: true
     },
-    userId: {
-        type: Number,
+    userIds: {
+        type: [Number],
         required: true
     },
     date: {
@@ -46,7 +46,7 @@ const EventSchema = mongoose.Schema({
 EventSchema.methods.toJson = function () {
     return {
         eventId: this.eventId,
-        userId: this.userId,
+        userIds: this.userIds,
         date: this.date,
         startTime: this.startTime,
         endTime: this.endTime,

@@ -16,14 +16,14 @@ exports.getOne = function (req, res, next) {
 }
 
 exports.getAllUserEvents = function (req, res, next) {
-    EventModel.find({ 'userId': req.params.userId }, function (err, data) {
+    EventModel.find({ 'userIds': req.params.userId }, function (err, data) {
         if (err) return next(err);
         res.json(data);
     });
 }
 
 exports.getUserDateEvents = function (req, res, next) {
-    EventModel.find({ 'date': req.params.date, 'userId': req.params.userId }, function (err, data) {
+    EventModel.find({ 'date': req.params.date, 'userIds': req.params.userId }, function (err, data) {
         if (err) return next(err);
         res.json(data);
     })
@@ -31,7 +31,7 @@ exports.getUserDateEvents = function (req, res, next) {
 }
 
 exports.getUserMonthEvents = function (req, res, next) {
-    EventModel.find({ 'month': req.params.month, 'userId': req.params.userId}, function (err, data) {
+    EventModel.find({ 'month': req.params.month, 'userIds': req.params.userId}, function (err, data) {
         if (err) return next(err);
         res.json(data);
     });
@@ -45,7 +45,7 @@ exports.createEvent = function (req, res, next) {
 
     let tempEvent = new EventModel({
         eventId: req.body.eventId,
-        userId: req.body.userId,
+        userIds: req.body.userIds,
         date: req.body.date,
         year: year,
         month: month,
@@ -89,7 +89,7 @@ exports.updateEvent = function (req, res, next) {
 
     EventModel.findOneAndUpdate({ 'eventId': req.params.eventId }, {
         eventId: req.body.eventId,
-        userId: req.body.userId,
+        userIds: req.body.userIds,
         date: req.body.date,
         year: year,
         month: month,
