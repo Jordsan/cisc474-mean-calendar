@@ -22,9 +22,8 @@ exports.login = function (req, res, next) {
             if (!isMatch) { return res.status(400).json({ error: 'Your login details could not be verified. Please try again.' }); }
 
             let userInfo = user.toJson();
-            
+
             res.status(200).json({
-                success: "lets fucking go",
                 token: 'Bearer ' + generateToken(userInfo),
                 user: userInfo
             });
@@ -63,7 +62,6 @@ exports.register = function (req, res, next) {
     User.findOne({ username: username }, function (err, existingUser) {
         if (err) { return next(err); }
         if (existingUser) {
-            console.log("do something about existing users");
             res.status(422).send({ error: 'Username already taken!' });
         } else {
             let user = new User({
@@ -73,8 +71,6 @@ exports.register = function (req, res, next) {
                 firstName: firstName,
                 lastName: lastName,
             });
-
-            console.log(user);
 
             user.save(function (err, user) {
                 if (err) { return next(err); }
