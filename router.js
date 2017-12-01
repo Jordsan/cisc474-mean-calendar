@@ -1,9 +1,11 @@
 const eventController = require('./controllers/event-controller');
+const authController = require('./controllers/auth-controller');
 const express = require('express');
 
 module.exports = function (app) {
     // Initializing route groups
     const apiRoutes = express.Router();
+    const authRoutes = express.Router();
 
     apiRoutes.get('/events', eventController.getAll);
     apiRoutes.get('/events/:eventId', eventController.getOne);
@@ -19,5 +21,13 @@ module.exports = function (app) {
     apiRoutes.delete('/events/:eventId', eventController.deleteEvent);
     apiRoutes.delete('/events', eventController.deleteAll);
 
-    app.use('/', apiRoutes);
+
+    authRoutes.post('/users/register', authController.register);
+    authRoutes.post('/users/login', authController.login);
+
+    authRoutes.get('/users', authController.getUsers);
+    authRoutes.delete('/users', authController.deleteUsers);
+
+    app.use('/auth', authRoutes);
+    app.use('/api', apiRoutes);
 };
