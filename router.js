@@ -26,7 +26,10 @@ module.exports = function (app) {
     authRoutes.post('/users/login', authController.login);
 
     authRoutes.get('/users', authController.getUsers);
+
     authRoutes.delete('/users', authController.deleteUsers);
+    authRoutes.delete('/users/:userId', authController.deleteUser);
+    
 
     app.use('/auth', authRoutes);
     app.use('/api', apiRoutes);

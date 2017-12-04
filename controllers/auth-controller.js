@@ -13,7 +13,8 @@ function generateToken(user) {
 // Login Route
 //========================================
 exports.login = function (req, res, next) {
-    User.findOne({ username: req.body.username }, function (err, user) {
+    User.findOne({ username: new RegExp('\\b' + req.body.username + '\\b', 'i') }, function (err, user) {
+        console.log(user);
         if (err) { return res.status(400).json({ error: "bad data" }); }
         if (!user) { return res.status(400).json({ error: 'Your login details could not be verified. Please try again.' }); }
 
@@ -94,6 +95,14 @@ exports.getUsers = function (req, res, next) {
 
 exports.deleteUsers = function (req, res, next) {
     User.remove({}, function (err) {
+        if (err) return console.error(err);
+
+        res.status(200).json();
+    });
+}
+
+exports.deleteUser = function (req, res, next) {
+    User.remove({ 'userId': req.params.userId }, function (err) {
         if (err) return console.error(err);
 
         res.status(200).json();
