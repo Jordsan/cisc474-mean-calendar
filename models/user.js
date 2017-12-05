@@ -26,6 +26,10 @@ const UserSchema = mongoose.Schema({
     lastName: {
         type: String,
         required: true
+    },
+    fullName: {
+        type: String,
+        required: true
     }
 
 });
@@ -37,7 +41,8 @@ UserSchema.methods.toJson = function () {
         username: this.username,
         password: this.password,
         firstName: this.firstName,
-        lastName: this.lastName
+        lastName: this.lastName,
+        fullName: this.fullName
     }
 }
 

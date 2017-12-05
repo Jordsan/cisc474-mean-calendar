@@ -71,6 +71,7 @@ exports.register = function (req, res, next) {
                 password: password,
                 firstName: firstName,
                 lastName: lastName,
+                fullName: firstName + ' ' + lastName
             });
 
             user.save(function (err, user) {
@@ -85,10 +86,25 @@ exports.register = function (req, res, next) {
     });
 }
 
+exports.getUsersByName = function (req, res, next) {
+    User.find({'fullName': { "$regex": req.params.searchTerm, "$options": "i" }}, function (err, data) {
+        if (err)
+            res.send(err);
+        res.json(data);
+    });
+}
+
 exports.getUsers = function (req, res, next) {
     User.find({}, function (err, data) {
         if (err)
             res.send(err);
+        res.json(data);
+    });
+}
+
+exports.getUser = function (req, res, next) {
+    User.findOne({ 'userId': req.params.userId }, function (err, data) {
+        if (err) return next(err);
         res.json(data);
     });
 }
