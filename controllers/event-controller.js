@@ -39,9 +39,9 @@ exports.getUserMonthEvents = function (req, res, next) {
 
 exports.createEvent = function (req, res, next) {
     let splitDate = (req.body.date).split("-");
-    let year = splitDate[2];
-    let month = splitDate[0];
-    let day = splitDate[1];
+    let year = splitDate[0];
+    let month = splitDate[1];
+    let day = splitDate[2];
 
     let tempEvent = new EventModel({
         eventId: req.body.eventId,
@@ -83,9 +83,22 @@ exports.deleteAll = function (req, res, next) {
 
 exports.updateEvent = function (req, res, next) {
     let splitDate = (req.body.date).split("-");
-    let year = splitDate[2];
-    let month = splitDate[0];
-    let day = splitDate[1];
+    let year = splitDate[0];
+    let month = splitDate[1];
+    let day = splitDate[2];
+
+    let tempEvent = new EventModel({
+        eventId: req.body.eventId,
+        userIds: req.body.userIds,
+        date: req.body.date,
+        year: year,
+        month: month,
+        day: day,
+        startTime: req.body.startTime,
+        endTime: req.body.endTime,
+        title: req.body.title,
+        description: req.body.description
+    })
 
     EventModel.findOneAndUpdate({ 'eventId': req.params.eventId }, {
         eventId: req.body.eventId,
