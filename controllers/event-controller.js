@@ -5,7 +5,7 @@ exports.getAll = function (req, res, next) {
         if (err)
             res.send(err);
         res.json(data);
-    });
+    }).sort({eventId: -1});
 }
 
 exports.getOne = function (req, res, next) {
